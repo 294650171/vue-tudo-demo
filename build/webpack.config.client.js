@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV === 'development'
 let config;
 
 let devServer={
-  port: 8000,
+  port: 8080,
   host: '0.0.0.0',
   overlay: {
     errors: true,
@@ -38,7 +38,7 @@ if (isDev) {
         {
           test: /\.styl/,
           use: [
-            'style-loader',
+            'vue-style-loader',
             'css-loader',
             {
               loader: 'postcss-loader',
@@ -60,7 +60,7 @@ if (isDev) {
 } else {
   config=merge(baseConfig,{
     entry:{
-      app: path.join(__dirname, '../src/index.js'),
+      app: path.join(__dirname, '../client/index.js'),
       vendor: ['vue']
     },
     output:{
@@ -71,7 +71,7 @@ if (isDev) {
         {
           test: /\.styl/,
           use: ExtractPlugin.extract({
-            fallback: 'style-loader',
+            fallback: 'vue-style-loader',
             use: [
               'css-loader',
               {
