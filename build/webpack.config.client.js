@@ -39,7 +39,13 @@ if (isDev) {
           test: /\.styl/,
           use: [
             'vue-style-loader',
-            'css-loader',
+            {
+              loader:'css-loader',
+              // options:{
+              //   module:true,
+              //   localIdentName:isDev?'[path]-[name]-[hash:base64:5]':'[hash:base64:5]'
+              // }
+            },
             {
               loader: 'postcss-loader',
               options: {
