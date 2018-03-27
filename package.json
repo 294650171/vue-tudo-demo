@@ -7,7 +7,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.config.client.js",
     "build": "npm run clean && npm run build:client",
-    "practice":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.practice.js",
+    "practice": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.practice.js",
     "lint": "eslint --ext .js --ext .jsx --ext .vue client/ practice/",
     "eslint-fix": "eslint --fix --ext .vue --ext .js --ext .jsx client/ practice/",
     "clean": "rimraf dist"
@@ -32,7 +32,7 @@
     "eslint-config-standard": "^11.0.0",
     "eslint-config-vue": "^2.0.2",
     "eslint-loader": "^1.9.0",
-    "eslint-plugin-html": "^4.0.2",
+    "eslint-plugin-html": "^3.0.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",

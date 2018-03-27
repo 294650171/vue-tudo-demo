@@ -11,3 +11,8 @@ const app = new Vue({
 setInterval(() => {
   app.text += 1
 }, 1000)
+
+app.$watch('text', (newTxt, oldTxt) => {
+  console.log(`${newTxt}:${oldTxt}`)
+})
+
