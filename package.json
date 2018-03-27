@@ -7,8 +7,9 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.config.client.js",
     "build": "npm run clean && npm run build:client",
-    "lint": "eslint --ext .js --ext .jsx --ext .vue client/",
-    "eslint-fix": "eslint --fix --ext .vue --ext .js --ext .jsx client/",
+    "practice":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.practice.js",
+    "lint": "eslint --ext .js --ext .jsx --ext .vue client/ practice/",
+    "eslint-fix": "eslint --fix --ext .vue --ext .js --ext .jsx client/ practice/",
     "clean": "rimraf dist"
   },
   "author": "",
