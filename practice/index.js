@@ -1,1 +1,1 @@
-import './lifecycle'
+import './component/extend'
