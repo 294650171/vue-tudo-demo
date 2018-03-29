@@ -13,7 +13,10 @@ let devServer={
   overlay: {
     errors: true,
   },
-  hot: true
+  hot: true,
+  historyApiFallback:{
+    index:'/index.html'
+  }
 }
 
 const defaultPlugins = [
