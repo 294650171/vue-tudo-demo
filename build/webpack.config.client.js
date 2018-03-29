@@ -2,20 +2,23 @@ const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const ExtractPlugin = require('extract-text-webpack-plugin')
-const baseConfig=require('./webpack.config.base')
-const merge=require('webpack-merge')
+const baseConfig = require('./webpack.config.base')
+const merge = require('webpack-merge')
 
 const isDev = process.env.NODE_ENV === 'development'
 
 let config;
 
-let devServer={
+let devServer = {
   port: 8080,
   host: '0.0.0.0',
   overlay: {
     errors: true,
   },
-  hot: true
+  hot: true,
+  historyApiFallback: {
+    index: '/public/index.html'
+  }
 }
 
 const defaultPlugins = [
@@ -24,23 +27,25 @@ const defaultPlugins = [
       NODE_ENV: isDev ? '"development"' : '"production"'
     }
   }),
-  new HTMLPlugin()
+  new HTMLPlugin({
+    template: path.join(__dirname, 'template.html')
+  })
 ]
 
 
 
 
 if (isDev) {
-  config=merge(baseConfig,{
-    devtool:'#cheap-module-eval-source-map',
-    module:{
-      rules:[
+  config = merge(baseConfig, {
+    devtool: '#cheap-module-eval-source-map',
+    module: {
+      rules: [
         {
           test: /\.styl/,
           use: [
             'vue-style-loader',
             {
-              loader:'css-loader',
+              loader: 'css-loader',
               // options:{
               //   module:true,
               //   localIdentName:isDev?'[path]-[name]-[hash:base64:5]':'[hash:base64:5]'
@@ -58,22 +63,22 @@ if (isDev) {
       ]
     },
     devServer,
-    plugins:defaultPlugins.concat([
+    plugins: defaultPlugins.concat([
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoEmitOnErrorsPlugin()
     ])
   })
 } else {
-  config=merge(baseConfig,{
-    entry:{
+  config = merge(baseConfig, {
+    entry: {
       app: path.join(__dirname, '../client/index.js'),
       vendor: ['vue']
     },
-    output:{
-      filename:'[name].[chunkhash:8].js'
+    output: {
+      filename: '[name].[chunkhash:8].js'
     },
-    module:{
-      rules:[
+    module: {
+      rules: [
         {
           test: /\.styl/,
           use: ExtractPlugin.extract({
@@ -92,7 +97,7 @@ if (isDev) {
         },
       ]
     },
-    plugins:defaultPlugins.concat([
+    plugins: defaultPlugins.concat([
       new ExtractPlugin('styles.[contentHash:8].css'),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor'
