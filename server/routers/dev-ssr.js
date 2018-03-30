@@ -6,6 +6,7 @@ const MemoryFS = require('memory-fs')
 const webpack = require('webpack')
 const VueServerRenderer = require('vue-server-renderer')
 
+const serverRender = require('./server-render')
 const serverConfig = require('../../build/webpack.config.server')
 const serverCompiler = webpack(serverConfig)
 const mfs = new MemoryFS()
@@ -16,10 +17,11 @@ serverCompiler.watch({}, (err, stats) => {
   if (err) throw err
   stats = stats.toJson()
   stats.errors.forEach(err => console.log(err))
-  stats.hasWarnings.forEach(warn => console.warn(err))
+  stats.warnings.forEach(warn => console.warn(err))
 
   const bundlePath = path.join(serverConfig.output.path,'vue-ssr-server-bundle.json')
-  bundle = JSON.parse(mfs.readFileSync(bundlePath,'uft-8'))
+  bundle = JSON.parse(mfs.readFileSync(bundlePath,'utf-8'))
+  console.log('new bundle generated')
 })
 
 const handleSSR = async(ctx) => {
@@ -43,4 +45,10 @@ const handleSSR = async(ctx) => {
       inject: false,
       clientManifest
     })
+    await serverRender(ctx,renderer,temlate)
 }
+
+const router = new Router()
+router.get('*',handleSSR)
+
+module.exports = router
