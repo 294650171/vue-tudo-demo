@@ -2,77 +2,94 @@
   <div id="app">
     <div id="cover"></div>
     <Header></Header>
-    <p>{{fullName}}-{{counter}}</p>
-    <p>moduleA:{{textA}}{{textPlus}}</p>
-    <p>moduleB:{{textB}}</p>
-    <p>textC:{{textC}}</p>
-    <router-link to='/app/123'>app</router-link>
-    <router-link to='/app/456'>app</router-link>
-
-    <router-link to='/login'>login</router-link>
-
+    <!-- <p>{{fullName}} {{counter}}</p> -->
+    <!-- <p>{{textC}} {{textPlus}}</p> -->
+    <!-- <router-link to="/app/123">app123</router-link>
+    <router-link to="/app/456">app456</router-link>
+    <router-link to="/login">login</router-link> -->
     <!-- <todo></todo> -->
-    <transition name="fade">
-      <router-view/>
+    <!-- <tabs>
+      <tab lable="text">
+        <span slot="label"></span>
+        <p>This is tab content</p>
+      </tab>
+    </tabs>
+    <ul>
+      <li>label</li>
+      <li>label2</li>
+    </ul>
+    <div class="tab-container">
+      <p>This is tab content</p>
+    </div> -->
+    <transition name="fade" mode="out-in">
+      <router-view />
     </transition>
+    <!-- <button @click="notify">click me1</button> -->
+    <!-- <notification content="test notify" /> -->
     <Footer></Footer>
-    <!-- <router-view name="a" /> -->
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import {
+  mapState
+//   mapGetters,
+//   mapActions,
+//   mapMutations
+} from 'vuex'
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
-// import Todo from './views/tudo/todo.vue'
-console.log(Header.__docs)
+// import Loading from './components/loading/loading.vue'
+// import Todo from './views/todo/todo.vue'
+
+// console.log(Header.__docs)
 
 export default {
+  metaInfo: {
+    title: 'Jokcy\'s Todo App'
+  },
   components: {
     Header,
-    Footer
+    Footer,
+    // Loading
     // Todo
   },
   mounted () {
-    console.log(this.$store)
+    // console.log(this.$store)
     // let i = 1
-    this.updateCountAsync({
-      num: 5,
-      time: 2000
-    })
+    // this.updateCountAsync({
+    //   num: 5,
+    //   time: 2000
+    // })
+    // this.$store.state.count = 3
     // setInterval(() => {
     //   this.updateCount({
     //     num: i++,
     //     num2: 2
     //   })
     // }, 1000)
-    this['a/add']()
-    this['b/testAction']()
   },
   methods: {
-    ...mapActions(['updateCountAsync', 'a/add', 'b/testAction']),
-    ...mapMutations(['updateCount', 'a/updateText'])
+    // ...mapActions(['updateCountAsync']),
+    // ...mapMutations(['updateCount']),
+    // notify () {
+    //   this.$notify({
+    //     content: 'test $notify',
+    //     btn: 'close'
+    //   })
+    // }
   },
   computed: {
-    // textA () {
-    //   return this.$store.state.a.text
-    // },
-    // textB () {
-    //   return this.$store.state.b.text
-    // },
-    ...mapState({
-      counter: (state) => state.count,
-      textA: (state) => state.a.text,
-      textB: (state) => state.b.text,
-      textC: state => state.c.text
-    }),
-    ...mapGetters({
-      'fullName': 'fullName',
-      textPlus: 'a/textPlus'
-    })
+    // ...mapState(['loading'])
+    // ...mapState({
+    //   counter: (state) => state.count
+    // }),
     // count () {
     //   return this.$store.state.count
     // },
+    // ...mapGetters({
+    //   'fullName': 'fullName'
+    // })
     // fullName () {
     //   return this.$store.getters.fullName
     // }
@@ -81,23 +98,34 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-#app {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+#app{
+  position absolute
+  left 0
+  right 0
+  top 0
+  bottom 0
 }
-
-#cover {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #999;
-  opacity: 0.9;
-  z-index: -1;
+#cover{
+  position absolute
+  left 0
+  top 0
+  right 0
+  bottom 0
+  background-color #999
+  opacity .9
+  z-index -1
+}
+#loading{
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+  background-color rgba(255,255,255,.3)
+  z-index 99
+  display flex
+  align-items center
+  justify-content center
 }
 </style>
 

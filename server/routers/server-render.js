@@ -1,12 +1,12 @@
 const ejs = require('ejs')
 
 module.exports = async (ctx, renderer, template) => {
-  ctx.headers['Content-type'] = 'text/html'
+  ctx.headers['Content-Type'] = 'text/html'
 
   const context = { url: ctx.path }
 
   try {
-    const appString = renderer.renderToString(context)
+    const appString = await renderer.renderToString(context)
 
     const html = ejs.render(template, {
       appString,
@@ -15,10 +15,8 @@ module.exports = async (ctx, renderer, template) => {
     })
 
     ctx.body = html
-    /* code */
   } catch (err) {
-    console.log(`render error` ,err)
+    console.log('render error', err)
     throw err
-   }
-
+  }
 }

@@ -25,19 +25,20 @@ serverCompiler.watch({}, (err, stats) => {
 })
 
 const handleSSR = async(ctx) => {
-  if (bundle) {
+  if (!bundle) {
     ctx.body = '请稍后'
     return
   }
 
   const clientManifestResp = await axios.get(
-    'http://127.0.0.1:8080/vue-ssr-client-manifest.json'
+    'http://127.0.0.1:8080/public/vue-ssr-client-manifest.json'
   )
 
   const clientManifest = clientManifestResp.data
 
   const temlate = fs.readFileSync(
-    path.join(__dirname, '../server.template.ejs')
+    path.join(__dirname, '../server.template.ejs'),
+    'utf-8'
   )
 
   const renderer = VueServerRenderer
