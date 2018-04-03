@@ -8,11 +8,12 @@
     "dev:server": "nodemon server/server.js",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.config.client.js",
-    "build": "npm run clean && npm run build:client",
+    "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.config.server.js",
+    "build": "npm run clean && npm run build:client && npm run build:server",
     "practice": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.practice.js",
     "lint": "eslint --ext .js --ext .jsx --ext .vue client/ practice/",
     "eslint-fix": "eslint --fix --ext .vue --ext .js --ext .jsx client/ practice/",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist && rimraf server-build"
   },
   "author": "",
   "license": "ISC",
@@ -70,7 +71,7 @@
     "koa-session": "^5.8.1",
     "sha1": "^1.1.1",
     "vue": "^2.5.16",
-    "vue-meta": "^1.4.3",
+    "vue-meta": "^1.5.0",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.16",
     "vuex": "^3.0.1"
