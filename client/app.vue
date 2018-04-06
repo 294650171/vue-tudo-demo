@@ -24,6 +24,8 @@
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
+     <button @click="notify">click me</button>
+    <!-- <notification content="test notify"/> -->
     <!-- <button @click="notify">click me1</button> -->
     <!-- <notification content="test notify" /> -->
     <Footer></Footer>
@@ -55,6 +57,7 @@ export default {
     // Todo
   },
   mounted () {
+  
     // console.log(this.$store)
     // let i = 1
     // this.updateCountAsync({
@@ -78,6 +81,12 @@ export default {
     //     btn: 'close'
     //   })
     // }
+    notify(){
+      this.$notify({
+        content: "test $notify",
+        btn: 'close'
+      })
+    }
   },
   computed: {
     // ...mapState(['loading'])

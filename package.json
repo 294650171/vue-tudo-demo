@@ -13,7 +13,8 @@
     "practice": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.practice.js",
     "lint": "eslint --ext .js --ext .jsx --ext .vue client/ practice/",
     "eslint-fix": "eslint --fix --ext .vue --ext .js --ext .jsx client/ practice/",
-    "clean": "rimraf dist && rimraf server-build"
+    "clean": "rimraf public && rimraf server-build",
+    "start": "cross-env NODE_ENV=production node server/server.js"
   },
   "author": "",
   "license": "ISC",
