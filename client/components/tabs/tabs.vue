@@ -3,18 +3,18 @@
     name: 'Tabs',
     props: {
       value: {
-        type: [String,Number],
+        type: [String, Number],
         required: true
       }
     },
     render () {
-      return {
-        <div class="tabs">
+      return (
+        <div class='tabs'>
           <ul class='tabs-header'>
-            {this.$slot.default}
+            {this.$slots.default}
           </ul>
         </div>
-      }
+      )
     }
   }
 </script>

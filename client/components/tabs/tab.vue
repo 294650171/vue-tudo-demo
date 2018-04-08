@@ -4,7 +4,7 @@ export default {
   props: {
     index: {
       required: true,
-      type: [String,Number],
+      type: [String, Number]
     },
     label: {
       type: String,
@@ -17,16 +17,16 @@ export default {
     }
   },
   render () {
-    const tab = this.$slots.label|| <span>{this.label}</span>
+    const tab = this.$slots.label || <span>{this.label}</span>
     const classNames = {
       tab: true,
       active: this.active
     }
-    return {
+    return (
       <li class={classNames}>
         {tab}
       </li>
-    }
+    )
   }
 }
 </script>

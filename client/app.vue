@@ -21,6 +21,7 @@
     <div class="tab-container">
       <p>This is tab content</p>
     </div> -->
+
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
@@ -34,7 +35,7 @@
 
 <script>
 import {
-  mapState
+  // mapState
 //   mapGetters,
 //   mapActions,
 //   mapMutations
@@ -52,12 +53,12 @@ export default {
   },
   components: {
     Header,
-    Footer,
+    Footer
     // Loading
     // Todo
   },
   mounted () {
-  
+
     // console.log(this.$store)
     // let i = 1
     // this.updateCountAsync({
@@ -81,9 +82,9 @@ export default {
     //     btn: 'close'
     //   })
     // }
-    notify(){
+    notify () {
       this.$notify({
-        content: "test $notify",
+        content: 'test $notify',
         btn: 'close'
       })
     }

@@ -17,9 +17,9 @@
 
 <script>
 export default {
-  name: "Notification",
+  name: 'Notification',
   computed: {
-    style(){
+    style () {
       return {}
     }
   },
@@ -30,7 +30,7 @@ export default {
     },
     btn: {
       type: String,
-      default: "关闭"
+      default: '关闭'
     }
   },
   data () {
@@ -39,20 +39,20 @@ export default {
     }
   },
   methods: {
-    handleClose(e) {
-      e.preventDefault();
-      this.$emit("close");
+    handleClose (e) {
+      e.preventDefault()
+      this.$emit('close')
     },
-    afterLeave(){
+    afterLeave () {
       this.$emit('closed')
     },
-    afterEnter(){
+    afterEnter () {
 
     },
-    clearTimer(){},
-    createTimer(){}
+    clearTimer () {},
+    createTimer () {}
   }
-};
+}
 </script>
 
 <style lang="stylus" scoped>

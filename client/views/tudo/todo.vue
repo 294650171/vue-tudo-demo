@@ -1,14 +1,23 @@
 <template>
   <section class="real-app">
+    <div class="tab-container">
+     <tabs value="1">
+      <tab label="tab1" index='1'></tab>
+      <tab index='2'>
+        <span slot="label" style="color:red;">tab2</span>
+      </tab>
+      <tab label="tab1" index='3'/> 
+    </tabs>
+    </div>
     <input type="text" class="add-input" autofocus="autofocus" placeholder="接下去要做什么？" @keyup.enter="addTodo">
     <item :todo="todo" v-for="todo in filteredTodos" :key="todo.id" @del="deleteTodo" />
-    <tabs :filter="filter" :todos="todos" @toggle="toggleFilter" @clearAllCompleted="clearAllCompleted" />
+    <helper :filter="filter" :todos="todos" @toggle="toggleFilter" @clearAllCompleted="clearAllCompleted" />
   </section>
 </template>
 
 <script>
 import Item from './item.vue'
-import Tabs from './tabs.vue'
+import Helper from './helper.vue'
 let id = 0
 export default {
   metaInfo: {
@@ -42,7 +51,7 @@ export default {
   },
   components: {
     Item,
-    Tabs
+    Helper
   },
   computed: {
     filteredTodos () {
@@ -102,6 +111,9 @@ export default {
   border: none;
   box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
 }
+.tab-container
+  background-color #fff
+  padding 0 15px
 </style>
 
 
