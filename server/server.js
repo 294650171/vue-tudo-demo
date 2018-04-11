@@ -5,28 +5,33 @@ const path = require('path')
 const staticRouter = require('./routers/static')
 const apiRouter = require('./routers/api')
 const app = new Koa()
+const createDb = require('./db/db')
+const config = require('../app.config')
 
+const db = createDb(config.db.appId,config.db.appKey)
 const isDev = process.env.NODE_ENV === 'development'
 
-app.use(async (ctx,next) =>{
-  try{
+app.use(async (ctx, next) => {
+  try {
     console.log(`request with path ${ctx.path}`)
     await next()
-  }catch(err){
+  } catch (err) {
     console.log(err)
     ctx.status = 500
-    if(isDev){
+    if (isDev) {
       ctx.body = err.message
-    } else{
+    } else {
       ctx.body = 'pls try later'
     }
   }
 })
 
-app.use(async (ctx,next)=>{
-  if(ctx.path==='/favicon.ico'){
-    await send(ctx,'/favicon.ico', {root:path.join(__dirname,'../')})
-  }else{
+app.use(async (ctx, next) => {
+  if (ctx.path === '/favicon.ico') {
+    await send(ctx, '/favicon.ico', {
+      root: path.join(__dirname, '../')
+    })
+  } else {
     await next()
   }
 })
@@ -41,10 +46,13 @@ if (isDev) {
 }
 
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods())
-
 const HOST = process.env.HOST || '0.0.0.0'
 const PORT = process.env.PORT || 3333
 
-app.listen(PORT,HOST,()=>{
+app.use(async (ctx,next) => {
+  ctx.db = db
+  await next()
+})
+app.listen(PORT, HOST, () => {
   console.log(`server is listening on ${HOST}:${PORT}`)
 })
