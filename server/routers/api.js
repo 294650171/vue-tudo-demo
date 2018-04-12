@@ -1,6 +1,8 @@
 const Router = require('koa-router')
 
-const apiRouter = new Router({ prefix: '/api'})
+const apiRouter = new Router({
+  prefix: '/api'
+})
 
 
 const successResponse = (data) => {
@@ -9,9 +11,9 @@ const successResponse = (data) => {
     data
   }
 }
-apiRouter.get('/todo', async(ctx)=>{
+apiRouter.get('/todo', async (ctx) => {
   const todos = await ctx.db.getAllTodos()
-  ctx.body =  successResponse(todos) 
+  ctx.body = successResponse(todos)
 })
 
 module.exports = apiRouter

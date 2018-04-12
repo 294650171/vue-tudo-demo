@@ -26,17 +26,18 @@ const handleRequest = ({
 }
 
 module.exports = (appId, appKey) => {
-    const getHeaders = () => {
-      const now = Date.now()
-      return {
-        'X-APICloud-AppId': appId,
-        'X-APICloud-AppKey': `${sha1(`${appId}UZ${appKey}UZ${now}`)}.${now}`
-      }
-    }
+  const getHeaders = () => {
+    const now = Date.now()
     return {
-      async getAllTodos() {
-        return handleRequest(await request.get(`/${className}`, {
-          headers: getHeaders()
-        }))
-      }
+      'X-APICloud-AppId': appId,
+      'X-APICloud-AppKey': `${sha1(`${appId}UZ${appKey}UZ${now}`)}.${now}`
     }
+  }
+  return {
+    async getAllTodos () {
+      return handleRequest(await request.get(`/${className}`, {
+        headers: getHeaders()
+      }))
+    }
+  }
+}
